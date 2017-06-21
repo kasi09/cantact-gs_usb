@@ -3,6 +3,7 @@
 The MIT License (MIT)
 
 Copyright (c) 2016 Hubert Denkmair
+Copyright (c) 2017 Eric Evenchick
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -66,7 +67,8 @@ int main(void)
 
 	gpio_init();
 
-	led_init(&hLED, LED1_GPIO_Port, LED1_Pin, false, LED2_GPIO_Port, LED2_Pin, false);
+	led_init(&hLED, LED1_GPIO_Port, LED1_Pin, LED1_Active_High, 
+             LED2_GPIO_Port, LED2_Pin, LED2_Active_High);
 	led_set_mode(&hLED, led_mode_off);
 
 	timer_init();

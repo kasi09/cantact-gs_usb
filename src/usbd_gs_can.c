@@ -3,6 +3,7 @@
 The MIT License (MIT)
 
 Copyright (c) 2016 Hubert Denkmair
+Copyright (c) 2017 Eric Evenchick
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -111,7 +112,7 @@ __ALIGN_BEGIN uint8_t USBD_GS_CAN_CfgDesc[USB_CAN_CONFIG_DESC_SIZ] __ALIGN_END =
 	USB_DESC_TYPE_CONFIGURATION,      /* bDescriptorType */
 	USB_CAN_CONFIG_DESC_SIZ,          /* wTotalLength */
 	0x00,
-	0x02,                             /* bNumInterfaces */
+	0x01,                             /* bNumInterfaces */
 	0x01,                             /* bConfigurationValue */
 	0x00,                             /* iConfiguration */
 	0x80,                             /* bmAttributes */
@@ -152,7 +153,9 @@ __ALIGN_BEGIN uint8_t USBD_GS_CAN_CfgDesc[USB_CAN_CONFIG_DESC_SIZ] __ALIGN_END =
 	HIBYTE(CAN_DATA_MAX_PACKET_SIZE),
 	0x00,                             /* bInterval: */
 	/*---------------------------------------------------------------------------*/
-
+// the DFU interface causes the gs_can driver to enumerate a second device
+// disabling this for now
+#if 0
 	/*---------------------------------------------------------------------------*/
 	/* DFU Interface Descriptor */
 	/*---------------------------------------------------------------------------*/
@@ -175,7 +178,7 @@ __ALIGN_BEGIN uint8_t USBD_GS_CAN_CfgDesc[USB_CAN_CONFIG_DESC_SIZ] __ALIGN_END =
 	0xFF, 0x00,                       /* wDetachTimeOut */
 	0x00, 0x08,                       /* wTransferSize */
 	0x1a, 0x01,                       /* bcdDFUVersion: 1.1a */
-
+#endif
 };
 
 /* Microsoft OS String Descriptor */

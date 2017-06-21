@@ -14,7 +14,7 @@ INCLUDES += -I"Middlewares/ST/STM32_USB_Device_Library/Core/Inc"
 
 LDFLAGS  = -mcpu=cortex-m0 -mthumb -O
 LDFLAGS += -Wall -Wextra -g3
-LDFLAGS += -T ldscripts/mem.ld -T ldscripts/libs.ld -T ldscripts/sections.ld 
+LDFLAGS += -T ldscripts/mem.ld -T ldscripts/libs.ld -T ldscripts/sections.ld
 LDFLAGS += -nostartfiles -Xlinker --gc-sections --specs=nano.specs
 
 SRC  = $(wildcard src/*.c)
@@ -48,10 +48,10 @@ flash-candleLight:
 	$(MAKE) CHIP=STM32F042x6 BOARD=candleLight board-flash
 
 cantact:
-	$(MAKE) CHIP=STM32F072xB BOARD=cantact bin
+	$(MAKE) CHIP=STM32F042x6 BOARD=cantact bin
 
 flash-cantact:
-	$(MAKE) CHIP=STM32F072xB BOARD=cantact board-flash
+	$(MAKE) CHIP=STM32F042x6 BOARD=cantact board-flash
 
 board-flash: bin
 	sudo dfu-util -d 1d50:606f -a 0 -s 0x08000000 -D $(BIN)
@@ -62,7 +62,7 @@ $(BIN): $(ELF)
 	@mkdir -p $(dir $@)	
 	$(OBJCOPY) -O binary $(ELF) $(BIN)
 	$(SIZE) --format=berkeley $(ELF) 
-	
+
 $(ELF): $(OBJ) $(ASM_OBJ)
 	@mkdir -p $(dir $@)	
 	$(CC) $(LDFLAGS) -o $@ $(OBJ) $(ASM_OBJ) 
